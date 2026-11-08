@@ -71,7 +71,7 @@ def mix(images, labels):
 
 
 def loss_fn(logits, targets):
-    return F.cross_entropy(logits, targets, label_smoothing=0.1)
+    return F.cross_entropy(logits, targets, label_smoothing=0.3)
 
 
 def on_step(step, total_steps, model, optimizer):
