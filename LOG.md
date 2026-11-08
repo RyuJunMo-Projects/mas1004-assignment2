@@ -40,3 +40,13 @@ wrong, one sheet per city. What they have in common, in the student's words:
 
 공통점 1. 도시의 전체적인 모습보다 사물, 구조물에 더 포커스가 맞춰진 사진이다.
 공통점 2. 시장, 지하철역, 공원 같이 세계 어디서나 볼 수 있는 장소들이다.
+
+## 2026-11-09 smooth03 (Track A, seed 0)
+- changed: `label_smoothing` in `loss_fn` of `track_a/recipe.py`, from 0.1 to
+  0.3. Nothing else differs from `baseline`: all training photos, the same
+  augmentation, the same optimiser and schedule, seed 0 only.
+- why: 라벨 스무딩이 되어있었음에도 자신있게 틀린 오답이 있었으니 라벨 스무딩 값을 바꾼다. 개선 기준은 0.01이다.
+- validation: not run yet (before: 0.503 with seed 0, 0.494 with seed 1). Queued
+  on Colab as commit `ac343e7`, `python src/official.py --tag smooth03`; the
+  number goes here when the run finishes.
+- what it means: to be written when the score is in.
