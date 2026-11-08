@@ -32,3 +32,11 @@ End the log with your plan for what to try next.
   (That is how much the score moves by luck, so from now on, when I test a
   changed recipe, a change of less than that is not enough to call it an
   improvement.)
+
+### Mistakes of `baseline` seed 0 (Step 3)
+
+The 48 validation photos the model was most confident about and still got
+wrong, one sheet per city. What they have in common, in the student's words:
+
+공통점 1. 도시의 전체적인 모습보다 사물, 구조물에 더 포커스가 맞춰진 사진이다.
+공통점 2. 시장, 지하철역, 공원 같이 세계 어디서나 볼 수 있는 장소들이다.
