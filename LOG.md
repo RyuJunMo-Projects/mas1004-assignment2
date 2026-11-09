@@ -46,7 +46,7 @@ wrong, one sheet per city. What they have in common, in the student's words:
   0.3. Nothing else differs from `baseline`: all training photos, the same
   augmentation, the same optimiser and schedule, seed 0 only.
 - why: 라벨 스무딩이 되어있었음에도 자신있게 틀린 오답이 있었으니 라벨 스무딩 값을 바꾼다. 개선 기준은 0.01이다.
-- validation: not run yet (before: 0.503 with seed 0, 0.494 with seed 1). Queued
-  on Colab, `python src/official.py --tag smooth03`; the number goes here when
-  the run finishes.
-- what it means: to be written when the score is in.
+- validation: 0.4932 (before: 0.503 with seed 0, 0.494 with seed 1). Per city:
+  seoul 0.577, busan 0.362, tokyo 0.650, osaka 0.340, taipei 0.537. 38.0 minutes
+  on a Colab T4, 249,984 photos.
+- what it means: 이전에 나온 시드간 변동을 반올림해 정해둔 기준인 0.01 이상 결과가 바뀌지 않았으니 개선되었다고 말하기 어렵다.
