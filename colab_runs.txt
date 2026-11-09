@@ -1,1 +1,1 @@
-python src/official.py --tag smooth03
+python src/official.py --tag crop07

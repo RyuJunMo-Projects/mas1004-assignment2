@@ -50,3 +50,14 @@ wrong, one sheet per city. What they have in common, in the student's words:
   seoul 0.577, busan 0.362, tokyo 0.650, osaka 0.340, taipei 0.537. 38.0 minutes
   on a Colab T4, 249,984 photos.
 - what it means: 이전에 나온 시드간 변동을 반올림해 정해둔 기준인 0.01 이상 결과가 바뀌지 않았으니 개선되었다고 말하기 어렵다.
+
+## 2026-11-09 crop07 (Track A, seed 0)
+- changed: `scale` in `T.RandomResizedCrop(224, ...)` of `train_transform` in
+  `track_a/recipe.py`, from (0.35, 1.0) to (0.7, 1.0). Nothing else differs from
+  `smooth03`: the same flip, the same colour jitter, label smoothing still 0.3,
+  all training photos, seed 0 only.
+- why: 구조물이나 사물이 너무 메인이여서 생기는 문제를 방지하기 위해 크롭을 약하게 한다 (크롭 하한 0.35 → 0.7). 기준선 대비 0.01 이상 오르지 않으면 개선되었다고 말하기 어렵다.
+- validation: not run yet (before: 0.4932 with smooth03 seed 0; 0.503 with
+  baseline seed 0 and 0.494 with baseline seed 1). Queued on Colab,
+  `python src/official.py --tag crop07`.
+- what it means: to be written when the score is in.
