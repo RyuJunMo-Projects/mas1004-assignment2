@@ -57,7 +57,8 @@ wrong, one sheet per city. What they have in common, in the student's words:
   `smooth03`: the same flip, the same colour jitter, label smoothing still 0.3,
   all training photos, seed 0 only.
 - why: 구조물이나 사물이 너무 메인이여서 생기는 문제를 방지하기 위해 크롭을 약하게 한다 (크롭 하한 0.35 → 0.7). 기준선 대비 0.01 이상 오르지 않으면 개선되었다고 말하기 어렵다.
-- validation: not run yet (before: 0.4932 with smooth03 seed 0; 0.503 with
-  baseline seed 0 and 0.494 with baseline seed 1). Queued on Colab,
-  `python src/official.py --tag crop07`.
-- what it means: to be written when the score is in.
+- validation: 0.4927 (before: 0.4932 with smooth03 seed 0; 0.503 with baseline
+  seed 0 and 0.494 with baseline seed 1). Per city: seoul 0.5733, busan 0.377,
+  tokyo 0.623, osaka 0.3675, taipei 0.5225. 10887.5 seconds (181.5 minutes) on
+  the CPU, 249,984 photos.
+- what it means: 이번에도 직전에 라벨 스무딩을 조정한 모델보다 검증점수 차이가 -0.0005 밖에 나지 않았다. 앞서 정한 기준 0.01보다 작은 숫자이기 때문에 모델이 개선되었다고 보기 어렵다.
