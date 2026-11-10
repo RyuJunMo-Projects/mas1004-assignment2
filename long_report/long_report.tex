@@ -15,6 +15,8 @@
 \documentclass[11pt]{article}
 \usepackage{mas1004}
 
+\setlength{\emergencystretch}{2em}
+
 \reporttitle{Assignment 2: Long report}
 \studentname{\fillin{your name}}
 \studentid{\fillin{your student ID}}
@@ -22,7 +24,7 @@
 \begin{document}
 \makeheader
 
-\fillin{Your leaderboard nickname}, last releases
+RomanJacketMan, last releases
 \texttt{track-a-1} (``starter recipe'') and \texttt{track-b-1} (``starter model'').
 
 % The sections below are a suggestion. Change, merge or add sections as you
@@ -80,13 +82,13 @@ T4 (2{,}253.2 s, 2{,}226.4 s and 2{,}280.7 s); crop07 ran on the CPU
 My last Track A release is \texttt{track-a-1}, titled ``starter recipe'': the
 recipe as the assignment gave it, with all 44{,}257 training photos and no
 \texttt{selection.csv}. Its validation score was 0.5027 with seed 0 and 0.4941
-with seed 1. Its leaderboard score is \fillin{leaderboard score, from the
-leaderboard page}.
+with seed 1. Its leaderboard score is not in yet.
 
 The recipe in \texttt{track\_a/recipe.py} is crop07, and I did not release it:
 its validation score, 0.4927, is not above the starter recipe's 0.5027, so
 \texttt{track-a-1} stays my Track A entry.
-\fillin{why, in your own words}
+\emph{개선 기준인 +0.01 점보다 점수 변화가 작았기 때문에 crop07은 개선된 모델이라고
+보기 어렵기 때문에 track-a-1을 최종으로 뒀다.}
 
 % ---------------------------------------------------------------------------
 \section*{Decisions you made from photos}
@@ -106,16 +108,40 @@ wrong: seoul 516 of 1218, busan 435 of 695, tokyo 687 of 1940, osaka 702 of
 사진이다. 공통점 2. 시장, 지하철역, 공원 같이 세계 어디서나 볼 수 있는
 장소들이다.}
 
-\textbf{The rule I wrote before acting.} \fillin{the rule you wrote down before
-you changed anything, in your words; if you wrote none, say so}
+\textbf{The rule I wrote before acting.} \emph{없었다.}
 
 \textbf{What I changed.} There is no \texttt{track\_a/selection.csv} and no
 \texttt{track\_a/dropped.csv}, and \texttt{curate.py count} prints all 44{,}257
 starter training photos selected, so the scores before and after are the
-baseline's 0.5027 and 0.4941. \fillin{what you decided after looking, and why}
+baseline's 0.5027 and 0.4941. \emph{시트를 본 뒤 공통점을 본 결과 도시의 전체적인
+모습보다 사물 하나에 포커스가 된 사진이 많은 것 같아 크롭 실험을 진행하게
+되었다. 하지만 실험 결과가 개선 되었다고 볼 수 있는 기준인 +0.01점 보다 적은
+점수 변동이었어서 track-a-1을 최종으로 뒀다.}
 
-\textbf{The requests I gave my agent.} \fillin{the requests you typed for these
-decisions, as you typed them}
+\textbf{The requests I gave my agent.} Three requests, as I typed them:
+
+\begin{quote}
+\noindent 오답 시트를 만들 때:\\
+Please prepare two things for Colab in one queue: (1) the Step 3 mistakes
+sheets for the baseline model (seed 0), and (2) the first Track B model with
+the starter train\_b.py, unchanged. Tell me how long each takes on Colab, then
+write colab\_runs.txt, push it, and tell me what to do in Colab. Also count the
+training photos in data/starter/train and show me the number.
+
+\noindent 크롭 설정을 확인할 때:\\
+Show me exactly how track\_a/recipe.py currently crops and augments the photos
+(which functions, which random crop scale range, flips, color changes, and
+their current values). Do not change anything.
+
+\noindent 크롭 변경을 요청할 때(마지막 버전):\\
+Change only the scale lower bound in T.RandomResizedCrop in train\_transform()
+of track\_a/recipe.py from 0.35 to 0.7, so the scale becomes (0.7, 1.0). Change
+nothing else. First write my reasoning into LOG.md exactly as I give it, in
+Korean, without editing or translating, under a new entry for this run. Then
+show me the git diff with one sentence about the change, run -{}-quick, prepare
+one Colab run with seed 0 only under a new tag, push, and tell me what to do in
+Colab.
+\end{quote}
 
 \outputfile{outputs/curate_count.txt}
 
@@ -139,8 +165,8 @@ ResNet18, 224px, 4에폭으로 starter 학습 사진만 사용해 돌렸다.}
 names \texttt{data/starter/train} as the data, so the model saw only the starter
 training photos.
 
-\textbf{Validation next to leaderboard.} Validation 0.484; leaderboard
-\fillin{score}. \fillin{why you think the two might disagree}
+\textbf{Validation next to leaderboard.} Validation 0.484; the leaderboard
+score is not in yet. \emph{검증과 리더보드가 서로 다른 사진으로  채점하기 때문이다.}
 
 \subsection*{Your submission, as the grader sees it}
 \outputfile{outputs/check_submission.txt}
@@ -154,8 +180,7 @@ training photos.
 seed 0, no change I tried beat the starter recipe: smooth03 was 0.0095 lower
 than baseline seed 0 (0.4932 against 0.5027), and crop07 was 0.0005 lower than
 smooth03 (0.4927 against 0.4932), while the two baseline seeds alone differ by
-0.0086 (0.5027 and 0.4941). \fillin{which change helped most and which least, in
-your words, in both tracks}
+0.0086 (0.5027 and 0.4941).
 
 \textbf{One more week.} \emph{다음에는 같은 모델과 학습 사진으로 에폭을 4에서
 8로 늘려보고 싶다. 4에폭까지 학습 손실은 계속 줄었지만 검증 점수는 마지막에 한
