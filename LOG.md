@@ -84,5 +84,7 @@ wrong, one sheet per city. What they have in common, in the student's words:
   and batch size. The one-cycle schedule is built from `args.epochs`, so it
   stretches to 8 epochs by itself.
 - why: 에폭을 올리는 이유: 지금 모델이 학습 사진을 더 여러 번 보면, 처음 보는 사진도 더 잘 맞히지 않을까라는 생각에 에폭을 올렸다.
-- validation: not yet. This entry was written before the run, so the score and
-  what it means go in here when the Colab run comes back.
+- validation: 0.5041 (before: 0.484 for b1; this is the second Track B run).
+  Per city: seoul 0.5671, busan 0.3899, tokyo 0.639, osaka 0.3891, taipei
+  0.5354. 52.1 minutes (3,124.0 s) on a Colab T4, 353,792 photos.
+- what it means: (not written yet --- I will send this sentence in my own words.)
