@@ -108,7 +108,7 @@ def main():
     ap.add_argument("--model", choices=sorted(MODELS), default="resnet18")
     ap.add_argument("--size", type=int, default=224)
     ap.add_argument("--folders", nargs="+", default=[str(ROOT / "data" / "starter" / "train")])
-    ap.add_argument("--epochs", type=int, default=4)
+    ap.add_argument("--epochs", type=int, default=8)
     ap.add_argument("--lr", type=float, default=3e-4)
     ap.add_argument("--batch-size", type=int, default=64)
     ap.add_argument("--balance", action="store_true", help="draw every city equally often")

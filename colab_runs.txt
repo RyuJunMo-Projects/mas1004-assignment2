@@ -1,1 +1,2 @@
-python src/official.py --tag crop07
+python src/train_b.py --tag b2 --submit
+python src/check_submission.py --no-val

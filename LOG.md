@@ -76,3 +76,13 @@ wrong, one sheet per city. What they have in common, in the student's words:
 ## Plan for what to try next
 
 다음에는 같은 모델과 학습 사진으로 에폭을 4에서 8로 늘려보고 싶다. 4에폭까지 학습 손실은 계속 줄었지만 검증 점수는 마지막에 한 번만 확인했다. 더 오래 학습했을 때 검증 점수도 오르는지, 그리고 내가 관심 있는 사물 중심 사진에서 오답이 줄어드는지 확인하고 싶다.
+
+## 2026-11-10 b2 (Track B)
+- changed: the `--epochs` default in `src/train_b.py`, from 4 to 8. Nothing else
+  differs from `b1`: the same ResNet18 at 224 px from the IMAGENET1K_V1 weights,
+  the same starter training photos, the same augmentation, the same optimiser
+  and batch size. The one-cycle schedule is built from `args.epochs`, so it
+  stretches to 8 epochs by itself.
+- why: 에폭을 올리는 이유: 지금 모델이 학습 사진을 더 여러 번 보면, 처음 보는 사진도 더 잘 맞히지 않을까라는 생각에 에폭을 올렸다.
+- validation: not yet. This entry was written before the run, so the score and
+  what it means go in here when the Colab run comes back.
