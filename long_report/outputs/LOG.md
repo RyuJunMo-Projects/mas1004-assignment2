@@ -76,3 +76,15 @@ wrong, one sheet per city. What they have in common, in the student's words:
 ## Plan for what to try next
 
 다음에는 같은 모델과 학습 사진으로 에폭을 4에서 8로 늘려보고 싶다. 4에폭까지 학습 손실은 계속 줄었지만 검증 점수는 마지막에 한 번만 확인했다. 더 오래 학습했을 때 검증 점수도 오르는지, 그리고 내가 관심 있는 사물 중심 사진에서 오답이 줄어드는지 확인하고 싶다.
+
+## 2026-11-10 b2 (Track B)
+- changed: the `--epochs` default in `src/train_b.py`, from 4 to 8. Nothing else
+  differs from `b1`: the same ResNet18 at 224 px from the IMAGENET1K_V1 weights,
+  the same starter training photos, the same augmentation, the same optimiser
+  and batch size. The one-cycle schedule is built from `args.epochs`, so it
+  stretches to 8 epochs by itself.
+- why: 에폭을 올리는 이유: 지금 모델이 학습 사진을 더 여러 번 보면, 처음 보는 사진도 더 잘 맞히지 않을까라는 생각에 에폭을 올렸다.
+- validation: 0.5041 (before: 0.484 for b1; this is the second Track B run).
+  Per city: seoul 0.5671, busan 0.3899, tokyo 0.639, osaka 0.3891, taipei
+  0.5354. 52.1 minutes (3,124.0 s) on a Colab T4, 353,792 photos.
+- what it means: 점수 향상이 기준치인 +0.01의 두 배라는 점, 5개 도시의 점수가 전부 올랐다는 점, 손실이 계속 하락했다는 점에서 모델이 개선되었다고 볼 수 있을 것 같다.

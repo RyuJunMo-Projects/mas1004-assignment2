@@ -87,4 +87,4 @@ wrong, one sheet per city. What they have in common, in the student's words:
 - validation: 0.5041 (before: 0.484 for b1; this is the second Track B run).
   Per city: seoul 0.5671, busan 0.3899, tokyo 0.639, osaka 0.3891, taipei
   0.5354. 52.1 minutes (3,124.0 s) on a Colab T4, 353,792 photos.
-- what it means: (not written yet --- I will send this sentence in my own words.)
+- what it means: 점수 향상이 기준치인 +0.01의 두 배라는 점, 5개 도시의 점수가 전부 올랐다는 점, 손실이 계속 하락했다는 점에서 모델이 개선되었다고 볼 수 있을 것 같다.

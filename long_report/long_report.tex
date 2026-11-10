@@ -25,7 +25,8 @@
 \makeheader
 
 RomanJacketMan, last releases
-\texttt{track-a-1} (``starter recipe'') and \texttt{track-b-1} (``starter model'').
+\texttt{track-a-1} (``starter recipe'') and \texttt{track-b-2} (``starter model,
+8 epochs'').
 
 % The sections below are a suggestion. Change, merge or add sections as you
 % like; README.md, "The long report", says what a reader should be able to see.
@@ -148,24 +149,43 @@ Colab.
 % ---------------------------------------------------------------------------
 \section*{Track B}
 
-\textbf{What I tried.} One step: \texttt{src/train\_b.py} as it came ---
-ResNet18 at 224 pixels from the \texttt{IMAGENET1K\_V1} weights, 4 epochs over
-\texttt{data/starter/train}, 176{,}896 photos through the model, on a Colab T4
-(1{,}565.9 s). Validation 0.484 (seoul 0.552, busan 0.382, tokyo 0.609, osaka
-0.377, taipei 0.499). \emph{Track B에서 나중에 설정을 바꿨을 때 좋아졌는지
-비교할 기준이 필요했다. 그래서 처음에는 \texttt{train\_b.py}의 기본 설정인
-ResNet18, 224px, 4에폭으로 starter 학습 사진만 사용해 돌렸다.}
+\textbf{What I tried.} Two steps. The first was \texttt{src/train\_b.py} as it
+came --- ResNet18 at 224 pixels from the \texttt{IMAGENET1K\_V1} weights, 4
+epochs over \texttt{data/starter/train}, 176{,}896 photos through the model, on
+a Colab T4 (1{,}565.9 s): validation 0.484 (seoul 0.552, busan 0.382, tokyo
+0.609, osaka 0.377, taipei 0.499). \emph{Track B에서 나중에 설정을 바꿨을 때
+좋아졌는지 비교할 기준이 필요했다. 그래서 처음에는 \texttt{train\_b.py}의 기본
+설정인 ResNet18, 224px, 4에폭으로 starter 학습 사진만 사용해 돌렸다.}
 
 \textbf{What I think it means.} \emph{전체 검증 점수는 0.484였는데, 도시마다
 차이가 컸다. 도쿄는 0.609였지만 부산은 0.382, 오사카는 0.377이었다. 다음
 실험에서는 전체 점수가 오르는지와 함께, 특히 부산과 오사카를 더 잘 맞히는지도
 보고 싶다.}
 
+\textbf{The second step, \texttt{track-b-2}.} The same script with one number
+changed: the \texttt{-{}-epochs} default in \texttt{src/train\_b.py}, from 4 to
+8. Nothing else differs --- the same weights, the same training photos, the same
+augmentation, the same batch of 64, and the one-cycle schedule is built from
+\texttt{args.epochs}, so it stretches to 8 epochs by itself. 353{,}792 photos
+went through the model in 3{,}124.0 s on the same Colab T4: validation 0.5041
+(seoul 0.5671, busan 0.3899, tokyo 0.639, osaka 0.3891, taipei 0.5354).
+\emph{에폭을 올리는 이유: 지금 모델이 학습 사진을 더 여러 번 보면, 처음 보는
+사진도 더 잘 맞히지 않을까라는 생각에 에폭을 올렸다.}
+
+That is 0.0201 above the 4-epoch run, and every city is higher: seoul +0.0151,
+busan +0.0079, tokyo +0.0299, osaka +0.0118, taipei +0.0361. The training loss
+fell in all eight epochs, from 1.378 to 0.691.
+
+\textbf{What I think it means.} \emph{점수 향상이 기준치인 +0.01의 두 배라는 점,
+5개 도시의 점수가 전부 올랐다는 점, 손실이 계속 하락했다는 점에서 모델이
+개선되었다고 볼 수 있을 것 같다.}
+
 \textbf{Extra photos.} I collected none: \texttt{submission/submission.json}
 names \texttt{data/starter/train} as the data, so the model saw only the starter
 training photos.
 
-\textbf{Validation next to leaderboard.} Validation 0.484; the leaderboard
+\textbf{Validation next to leaderboard.} Validation 0.5041 for
+\texttt{track-b-2} (0.484 for the 4-epoch run before it); the leaderboard
 score is not in yet. \emph{검증과 리더보드가 서로 다른 사진으로  채점하기 때문이다.}
 
 \subsection*{Your submission, as the grader sees it}
@@ -176,13 +196,18 @@ score is not in yet. \emph{검증과 리더보드가 서로 다른 사진으로 
 % ---------------------------------------------------------------------------
 \section*{What made the difference}
 
-\textbf{What made the difference.} Measured on \texttt{data/starter/val} with
-seed 0, no change I tried beat the starter recipe: smooth03 was 0.0095 lower
+\textbf{What made the difference.} Measured on \texttt{data/starter/val}, no
+change I tried in Track A beat the starter recipe: smooth03 was 0.0095 lower
 than baseline seed 0 (0.4932 against 0.5027), and crop07 was 0.0005 lower than
 smooth03 (0.4927 against 0.4932), while the two baseline seeds alone differ by
-0.0086 (0.5027 and 0.4941).
+0.0086 (0.5027 and 0.4941). In Track B the one change I made did move the
+score: 8 epochs instead of 4 gave 0.5041 against 0.484, which is 0.0201 higher
+and higher in all five cities (seoul +0.0151, busan +0.0079, tokyo +0.0299,
+osaka +0.0118, taipei +0.0361), and 0.0201 is more than the 0.0086 that
+separates the two baseline seeds from each other.
 
-\textbf{One more week.} \emph{다음에는 같은 모델과 학습 사진으로 에폭을 4에서
+\textbf{One more week.} The plan I wrote down before the 8-epoch run was:
+\emph{다음에는 같은 모델과 학습 사진으로 에폭을 4에서
 8로 늘려보고 싶다. 4에폭까지 학습 손실은 계속 줄었지만 검증 점수는 마지막에 한
 번만 확인했다. 더 오래 학습했을 때 검증 점수도 오르는지, 그리고 내가 관심 있는
 사물 중심 사진에서 오답이 줄어드는지 확인하고 싶다.}
