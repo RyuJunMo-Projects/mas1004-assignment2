@@ -62,3 +62,17 @@ wrong, one sheet per city. What they have in common, in the student's words:
   tokyo 0.623, osaka 0.3675, taipei 0.5225. 10887.5 seconds (181.5 minutes) on
   the CPU, 249,984 photos.
 - what it means: 이번에도 직전에 라벨 스무딩을 조정한 모델보다 검증점수 차이가 -0.0005 밖에 나지 않았다. 앞서 정한 기준 0.01보다 작은 숫자이기 때문에 모델이 개선되었다고 보기 어렵다.
+
+## 2026-11-09 b1 (Track B)
+- changed: nothing — `src/train_b.py` as it came: ResNet18 at 224 px from the
+  IMAGENET1K_V1 weights, 4 epochs over all of `data/starter/train`, no extra
+  photos, on a Colab T4. 176,896 photos through the model, 1,565.9 s.
+- why: Track B에서 나중에 설정을 바꿨을 때 좋아졌는지 비교할 기준이 필요했다. 그래서 처음에는 `train_b.py`의 기본 설정인 ResNet18, 224px, 4에폭으로 starter 학습 사진만 사용해 돌렸다.
+- validation: 0.484 (before: nothing to compare with; this is the first Track B
+  run). Per city: seoul 0.552, busan 0.382, tokyo 0.609, osaka 0.377, taipei
+  0.499. 26.1 minutes on a Colab T4, 176,896 photos.
+- what it means: 전체 검증 점수는 0.484였는데, 도시마다 차이가 컸다. 도쿄는 0.609였지만 부산은 0.382, 오사카는 0.377이었다. 다음 실험에서는 전체 점수가 오르는지와 함께, 특히 부산과 오사카를 더 잘 맞히는지도 보고 싶다.
+
+## Plan for what to try next
+
+다음에는 같은 모델과 학습 사진으로 에폭을 4에서 8로 늘려보고 싶다. 4에폭까지 학습 손실은 계속 줄었지만 검증 점수는 마지막에 한 번만 확인했다. 더 오래 학습했을 때 검증 점수도 오르는지, 그리고 내가 관심 있는 사물 중심 사진에서 오답이 줄어드는지 확인하고 싶다.
